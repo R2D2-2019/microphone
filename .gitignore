@@ -1,0 +1,9 @@
+# compiled file types
+*.o
+*.bin
+*.elf
+*.ld
+*.map
+
+# compiled files
+bmptk_fixed_size_stack.c
