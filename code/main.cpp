@@ -12,11 +12,11 @@ int main(void) {
     auto STATUS = hwlib::target::pin_out(hwlib::target::pins::d13);
 
     // pin initialization
-    GND.set(0);
-    STATUS.set(1);
+    GND.write(0);
+    STATUS.write(1);
 
     while (true) {
-      STATUS.set(MIC_IN.get());
+      STATUS.write(MIC_IN.read());
       hwlib::wait_ms(10);
     }
 }
