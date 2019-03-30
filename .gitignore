@@ -1,13 +1,14 @@
-# compiled file types
 *.o
-*.bin
 *.elf
-*.ld
+*.bin
+*.c
 *.map
+*.ld
+*.cbp
+*.lss
 *.exe
-
-# compiled files
-bmptk_fixed_size_stack.c
-
-# editor specific files
-.vscode/*
+*.lst
+*.exe
+.idea/
+cmake*/
+settings.json

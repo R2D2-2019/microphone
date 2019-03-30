@@ -1,11 +1,18 @@
-#include "hwlib.hpp"
+#include <iostream>
+#include <hwlib.hpp>
 
 int main(void) {
-  // kill the watchdog
-    WDT->WDT_MR = WDT_MR_WDDIS;
-    hwlib::wait_ms(1000);
-    for (;;){
-        hwlib::cout << "this works via arduino";
-        hwlib::wait_ms(1000);
+    hwlib::target::init();  
+    std::cout << "Raspberry Pi blink\n";
+
+    auto led = hwlib::target::pin_out(hwlib::target::pins::d40);
+
+    while (true) {
+        led.write(true); // on
+        hwlib::wait_ms(500);
+        led.write(false); // on
+        hwlib::wait_ms(500);
     }
+
+    return 0;
 }

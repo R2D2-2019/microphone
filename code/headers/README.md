@@ -1,3 +1,1 @@
-# headers
-
-This folder contains only headers
+# This folder contains only headers

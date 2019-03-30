@@ -1,3 +1,1 @@
-# SRC
-
-This file contains only source files
+# This file contains only source files
