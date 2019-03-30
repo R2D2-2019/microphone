@@ -9,6 +9,7 @@
 *.exe
 *.lst
 *.exe
+*.out
 .idea/
 cmake*/
 settings.json
