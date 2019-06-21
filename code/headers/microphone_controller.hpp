@@ -10,8 +10,7 @@ namespace r2d2::microphone {
      */
     class microphone_controller_c {
     private:
-        hwlib::target::pin_adc *mic;
-
+        hwlib::target::pin_adc &mic;
         bool mute = false;
 
     public:
@@ -20,7 +19,9 @@ namespace r2d2::microphone {
          *
          * @param mic The adc input that reads the microphone.
          */
-        microphone_controller_c(hwlib::target::pin_adc &mic);
+        microphone_controller_c(hwlib::target::pin_adc &new_mic):
+	    mic(new_mic)
+	{}
 
         /**
          * This function overrides the read() function of pin_in
@@ -31,12 +32,19 @@ namespace r2d2::microphone {
         int_fast16_t read_mic();
 
         /**
-         * This function overrides the read() function of pin_in
-         * and reads the data of a pin_in.
-         *
-         * @internal refreshes/reads the incoming data.
+         * This function blocks the read_mic() function
+         * 
+         * @internal sets mute value to true
          */
-        void set_mute(bool setting);
+        void mute();
+	
+	/**
+	 * This function unblocks the read_mic() function
+	 *
+	 * @ internal sets mute value to false
+	 */
+	void unmute();
+
 
         /**
          * This function is for testing/reading
