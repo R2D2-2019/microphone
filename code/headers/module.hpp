@@ -8,7 +8,7 @@ namespace r2d2::microphone {
     /**
      * Class module_c provides the process function
      * for receiving data requests
-     * and sending the data of the steering_wheel_controller_c.
+     * and sending the data of the microphone module.
      */
     class module_c : public base_module_c {
     private:
@@ -25,7 +25,7 @@ namespace r2d2::microphone {
         module_c(base_comm_c &comm, microphone_controller_c &mic)
             : base_module_c(comm), mic(mic) {
 
-            comm.listen_for_frames({frame_type::MICROPHONE});
+            comm.listen_for_frames({frame_type::MICROPHONE_REQUEST});
         }
 
         /**
@@ -43,22 +43,25 @@ namespace r2d2::microphone {
                 if (!frame.request) {
                     continue;
                 }
-                // frame_manual_control_s movement_state;
 
-                // movement_state.brake = microphone.get_button(2);
-                // movement_state.rotation = microphone.get_slider(0);
-                // movement_state.speed = microphone.get_slider(1);
+		// take a sample
+		mic.sample();
+
+		// build frame
+		frame_microphone_s microphone_state;
+		microphone_state.length = sizeof(mic.sample_buffer / sizeof(uint16_t));
+
+		uint16_t *microphone_ptr = mic.read_buffer(); // get pointer to buffer
+		for (int i=0; i<microphone_state.length; i++){
+			microphone_state.microphone_data[i] = *microphone_ptr;
+			microphone_ptr++;
+		}
 
                 /*
                  * Send it off!
                  */
-                comm.send(1);
+                comm.send(microphone_state);
             }
-
-            /*
-             * Send it off!
-             */
-            comm.send(mic.read_mic());
         }
     };
 
