@@ -13,3 +13,5 @@ cmake*/
 CMakeLists.txt
 settings.json
 .vscode/*
+
+*.swp #exclude vim swap files
