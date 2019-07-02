@@ -25,7 +25,7 @@ namespace r2d2::microphone {
         module_c(base_comm_c &comm, microphone_controller_c &mic)
             : base_module_c(comm), mic(mic) {
 
-            comm.listen_for_frames({frame_type::MICROPHONE_REQUEST});
+            comm.listen_for_frames({frame_type::MICROPHONE});
         }
 
         /**
