@@ -53,7 +53,7 @@ namespace r2d2::microphone {
 		microphone_state.length = buffer_length; // max buffer length
 
 		uint16_t *microphone_ptr = mic.read_buffer(); // get pointer to buffer
-		for (int i=0; i<buffer_length.length; ++i){
+		for (int i=0; i<buffer_length; ++i){
 			microphone_state.microphone_data[i] = *microphone_ptr;
 			microphone_ptr++;
 		}
