@@ -7,11 +7,16 @@ namespace r2d2::microphone {
     /**
      * Class microphone_controller_c provides functions
      * for collecting audio data from the KY-038 module.
+     *
+     * Uses a template to determine the buffer size at
+     * compile time.
      */
+
     class microphone_controller_c {
     private:
         hwlib::adc &mic;
-	uint16_t sample_buffer[63]; // max internal CAN bus buffer size
+	static const int buffer_size = 63; // size of internal communication buffer, this size must not be changed!!
+	uint16_t sample_buffer[buffer_size];
         bool muted = false; // microphone is not muted by default
 
     public:
@@ -39,6 +44,11 @@ namespace r2d2::microphone {
 	 * @return pointer to sample buffer 
 	 */
 	uint16_t *read_buffer();
+	
+	/**
+	 * This function returns the buffer size
+	 */
+	const int get_buffer_size();
 
         /**
 	 * This function takes a block of 63

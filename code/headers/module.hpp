@@ -13,15 +13,14 @@ namespace r2d2::microphone {
     class module_c : public base_module_c {
     private:
         microphone_controller_c &mic;
-	const int buffer_length = 63; //max buffer length
 
     public:
         /**
          * Instantiate the module class
          *
          * @param comm - The internal communication bus instance.
-         * @param microphone - The steering wheel controller that represents
-         * the steering wheel/manual control.
+         * @param microphone - The microphone controller that represents
+         * the microphone.
          */
         module_c(base_comm_c &comm, microphone_controller_c &mic)
             : base_module_c(comm), mic(mic) {
@@ -50,10 +49,10 @@ namespace r2d2::microphone {
 
 		// build frame
 		frame_microphone_s microphone_state;
-		microphone_state.length = buffer_length; // max buffer length
+		microphone_state.length = mic.get_buffer_size(); // max buffer length
 
 		uint16_t *microphone_ptr = mic.read_buffer(); // get pointer to buffer
-		for (int i=0; i<buffer_length; ++i){
+		for (int i=0; i<mic.get_buffer_size(); ++i){
 			microphone_state.microphone_data[i] = *microphone_ptr;
 			microphone_ptr++;
 		}
