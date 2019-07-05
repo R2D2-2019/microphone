@@ -1,6 +1,6 @@
 #pragma once
 
-#include <hwlib.hpp>
+#include "hwlib.hpp"
 
 namespace r2d2::microphone {
 
@@ -10,7 +10,7 @@ namespace r2d2::microphone {
      */
     class microphone_controller_c {
     private:
-        hwlib::target::pin_adc &mic;
+        hwlib::adc &mic;
 	uint16_t sample_buffer[63]; // max internal CAN bus buffer size
         bool muted = false; // microphone is not muted by default
 
@@ -20,7 +20,7 @@ namespace r2d2::microphone {
          *
          * @param mic The adc input that reads the microphone
          */
-        microphone_controller_c(hwlib::target::pin_adc &new_mic):
+        microphone_controller_c(hwlib::adc &new_mic):
 	    mic(new_mic)
 	{}
 

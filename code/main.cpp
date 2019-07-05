@@ -22,7 +22,7 @@ int main(void) {
 
     microphone::module_c module(comm, microphone_controller);
 
-    for (;;) {
+    while(1) {
         microphone_controller.print();
         module.process();
         hwlib::wait_ms(100);
