@@ -1,11 +1,9 @@
 #include <hwlib.hpp>
 
 #include <comm.hpp>
-#include <module.hpp>
+#include "headers/module.hpp"
+#include "headers/microphone_controller.hpp"
 
-#include <microphone_controller.hpp>
-
-namespace target = hwlib::target;
 
 int main(void) {
 
@@ -17,7 +15,7 @@ int main(void) {
     hwlib::wait_ms(10);
 
     comm_c comm;
-    auto mic = hwlib::pin_adc(hwlib::target::ad_pins::a0);
+    auto mic = hwlib::target::pin_adc(hwlib::target::ad_pins::a0);
     auto microphone_controller = microphone::microphone_controller_c(mic);
 
     microphone::module_c module(comm, microphone_controller);
