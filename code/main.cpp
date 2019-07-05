@@ -17,12 +17,12 @@ int main(void) {
     hwlib::wait_ms(10);
 
     comm_c comm;
-    auto mic = hwlib::target::pin_adc(hwlib::target::ad_pins::a0);
+    auto mic = hwlib::pin_adc(hwlib::target::ad_pins::a0);
     auto microphone_controller = microphone::microphone_controller_c(mic);
 
     microphone::module_c module(comm, microphone_controller);
 
-    while(1) {
+    for(;;) {
         microphone_controller.print();
         module.process();
         hwlib::wait_ms(100);
