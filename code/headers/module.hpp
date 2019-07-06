@@ -2,6 +2,7 @@
 
 #include <base_module.hpp>
 #include <microphone_controller.hpp>
+#include <algorithm>
 
 namespace r2d2::microphone {
 
@@ -51,12 +52,11 @@ namespace r2d2::microphone {
 		frame_microphone_s microphone_state;
 		microphone_state.length = mic.get_buffer_size(); // max buffer length
 
-		uint16_t *microphone_ptr = mic.read_buffer(); // get pointer to buffer
-		for (int i=0; i<mic.get_buffer_size(); ++i){
-			microphone_state.microphone_data[i] = *microphone_ptr;
-			microphone_ptr++;
+		int c_index = 0; // we need to copy to a c style array in the frame
+		for (auto &sample : mic.read_buffer()){
+			microphone_state.microphone_data[c_index] = sample; // copy values to frame
+			++c_index; // increase c style iterator
 		}
-
                 /*
                  * Send it off!
                  */

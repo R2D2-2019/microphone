@@ -1,6 +1,7 @@
 #pragma once
 
 #include "hwlib.hpp"
+#include <array>
 
 namespace r2d2::microphone {
 
@@ -15,8 +16,8 @@ namespace r2d2::microphone {
     class microphone_controller_c {
     private:
         hwlib::adc &mic;
-	static const int buffer_size = 63; // size of internal communication buffer, this size must not be changed!!
-	uint16_t sample_buffer[buffer_size];
+	static constexpr int buffer_size = 63; // size of internal communication buffer, this size must not be changed!!
+	std::array<uint16_t, buffer_size> sample_buffer; // array storing our samples
         bool muted = false; // microphone is not muted by default
 
     public:
@@ -43,12 +44,14 @@ namespace r2d2::microphone {
 	 *
 	 * @return pointer to sample buffer 
 	 */
-	uint16_t *read_buffer();
+	const std::array<uint16_t, buffer_size> & read_buffer();
 	
 	/**
 	 * This function returns the buffer size
 	 */
-	const int get_buffer_size();
+	constexpr int get_buffer_size() const{
+		return buffer_size;
+	}
 
         /**
 	 * This function takes a block of 63
