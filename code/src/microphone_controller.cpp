@@ -17,12 +17,8 @@ namespace r2d2::microphone {
 	    }
 	}
 
-	uint16_t* microphone_controller_c::read_buffer(){
-	    return sample_buffer; // return pointer to buffer
-	}
-
-	const int microphone_controller_c::get_buffer_size(){
-	    return buffer_size;
+	const std::array<uint16_t, microphone_controller_c::buffer_size> & microphone_controller_c::read_buffer(){
+	    return sample_buffer; // return reference to buffer
 	}
 
 	void microphone_controller_c::mute() {
