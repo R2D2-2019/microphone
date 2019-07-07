@@ -1,8 +1,8 @@
 #include <hwlib.hpp>
 
 #include <comm.hpp>
-#include "module.hpp"
-#include "microphone_controller.hpp"
+#include <module.hpp>
+#include <microphone_controller.hpp>
 
 
 int main(void) {

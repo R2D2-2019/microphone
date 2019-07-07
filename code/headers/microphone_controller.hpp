@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hwlib.hpp"
+#include <hwlib.hpp>
 #include <array>
 
 namespace r2d2::microphone {
@@ -40,9 +40,9 @@ namespace r2d2::microphone {
      */
     uint16_t read_mic();
     /**
-             * This function returns a pointer to the sample buffer
+             * This function returns a reference to the sample buffer
              *
-             * @return pointer to sample buffer
+             * @return reference to sample buffer array
              */
     const std::array<uint16_t, buffer_size> &read_buffer();
 
